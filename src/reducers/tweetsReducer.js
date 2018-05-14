@@ -27,6 +27,10 @@ export default function reducer(state = {
         case "DELETE_TWEET": {
             return {...state, tweets: state.tweets.filter(tweet => tweet.id !== action.payload)}
         }
+        case "FUN_FUNCTION": {
+            console.log("this is FUN_FUNCTION2 from tweets only", state);
+            return {state}
+        }
         default:
             return {state}
     }

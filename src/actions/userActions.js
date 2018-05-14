@@ -21,3 +21,9 @@ export function setUserAge(age) {
         payload: age
     }
 }
+
+export function funFunction() {
+    return {
+        type: "FUN_FUNCTION",
+    }
+}

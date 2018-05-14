@@ -1,36 +1,34 @@
 import React, {Component} from 'react';
-import connect from 'redux-connect-decorator';
+import {connect} from 'react-redux';
 import {fetchUser} from "../actions/userActions";
+import {funFunction} from "../actions/userActions";
 import {fetchTweets} from "../actions/tweetsActions";
 
-@connect((store) => {
-    return {
-        user: store.user.user,
-        userFetched: store.user.fetched,
-        tweets: store.tweets.tweets,
-    };
-})
 class Index extends Component {
-    componentWillMount(){
-        this.props.dispatch(fetchUser())
-    }
-    fetchTweets(){
-        this.props.dispatch(fetchTweets())
+    constructor(props){
+        super(props);
+        console.log("This is working from constructor", this.props);
+        this.props.testClick();
     }
     render() {
-        const {user, tweets} = this.props;
-        if(!tweets.length){
-            return <button onClick={this.fetchTweets.bind(this)}>Load Tweets</button>
-        }
-        const mappedTweets = tweets.map(tweet => <li>{tweet.text}</li>);
+        console.log("This is working", this.props, this.props.user.state.fetched);
         return (
             <div>
-                <h1>{user.name}</h1>
-                <ul>{mappedTweets}</ul>
+                <h1>This is header </h1>
+                <ul>This is ul</ul>
             </div>
         );
     }
 
 }
-
-export default Index;
+const mapDispatchToProps = (dispatch) => {
+    return{
+        // testClick: () => dispatch(funFunction("THIS"))
+        testClick: () => {dispatch(funFunction())}
+    }
+};
+const mapStateToProps = (state) => {
+    return state;
+};
+const DefaultIndex = connect(mapStateToProps, mapDispatchToProps)(Index);
+export default DefaultIndex;
